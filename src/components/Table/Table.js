@@ -1,6 +1,7 @@
 import React from "react";
 import "./Table.css";
 import Card from "../Card";
+import SearchForm from "../SearchForm";
 import API from "../../utils/API";
 
 
@@ -8,6 +9,7 @@ class Table extends React.Component {
   // Setting the initial state of the Counter component
   state = {
     users: [],
+    searchUsers: []
   }
 
 
@@ -15,16 +17,36 @@ class Table extends React.Component {
   componentDidMount() {
     API.getUsers()
     .then(res => {
-      console.log(res.data.results)
       this.setState({
         users: res.data.results,
+        searchUsers: res.data.results
       });
     });
   }
 
+  handleInputChange  = (event) => {
+    const value = event.target.value;
+    const userList = this.state.users.filter(name => {
+   
+      let values = Object.values(name).join("").toLowerCase();
+      
+      return values.indexOf(value.toLowerCase()) !== -1;
+    }); 
+    console.log(userList)
+    this.setState({ searchUsers: userList });
+  }
+
+  
   render() {
     return (
+   
       <div className="container">
+        <div className="row">
+          <SearchForm
+          handleInputChange={this.handleInputChange}
+    
+        /> 
+        </div>
         <div className="row">
           <div className="col">
             <table className="table table-striped">
@@ -40,9 +62,7 @@ class Table extends React.Component {
               </thead>
               <tbody>
                 {
-                  this.state.users.map(user => {
-                    console.log(user)
-
+                  this.state.searchUsers.map(user => {
                     return (
                       <Card
                         img={user.picture.thumbnail}
