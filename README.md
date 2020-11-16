@@ -35,9 +35,8 @@ npm start
 
 ## Usage
 
-Screenshot
+Screenshot of Main Page
 
-The main page display
 <img src="public\img\EmployeeDirectory.JPG">
 
 
