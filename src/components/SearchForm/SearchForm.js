@@ -3,7 +3,7 @@ import "./SearchForm.css";
 
 function SearchForm(props) {
   return (
-      <nav className="navbar navbar-light bg-light ml-auto mr-auto">
+      <nav className="navbar navbar-light ml-auto mr-auto">
         <form className="form-inline">
           <input
            onChange={props.handleInputChange}
